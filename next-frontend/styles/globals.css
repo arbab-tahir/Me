@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.picborder {
+  border: 8px solid #2c2c29;
+}
+
+.whoami {
+  background: linear-gradient(to right, #a500ff, #4fbae8, #2d9ac9);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.upperpart {
+  margin-top: -125px;
+}
+
+/* .justify-center {
+  margin-top: -15px;
+} */
+
+@media (max-width: 768px) {
+  .upperpart {
+    margin-top: -50px;
+  }
+}
