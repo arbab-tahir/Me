@@ -16,8 +16,60 @@ html {
   -webkit-background-clip: text;
 }
 
+.descList {
+  list-style: circle;
+}
+
+.ablogs {
+  display: inline-block;
+}
+
 .upperpart {
   margin-top: -125px;
+}
+
+.top-to-btm {
+  position: relative;
+}
+.icon-position {
+  position: fixed;
+  bottom: 40px;
+  right: 25px;
+  z-index: 20;
+}
+.icon-style {
+  background: linear-gradient(to right, #a500ff, #4fbae8, #2d9ac9);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  color: #fff;
+  cursor: pointer;
+  animation: movebtn 3s ease-in-out infinite;
+  transition: all 0.5s ease-in-out;
+}
+.icon-style:hover {
+  animation: none;
+  background: #fff;
+  color: #a500ff;
+  border: 2px solid #a500ff;
+}
+@keyframes movebtn {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* .justify-center {
@@ -27,5 +79,9 @@ html {
 @media (max-width: 768px) {
   .upperpart {
     margin-top: -50px;
+  }
+
+  .ablogs {
+    display: block;
   }
 }

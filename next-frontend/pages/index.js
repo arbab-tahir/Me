@@ -2,17 +2,36 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { createClient } from "next-sanity";
-
+import Alert from "../components/Alert";
 import Script from "next/script";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import imageUrlBuilder from "@sanity/image-url";
 import Link from "next/link";
 import NavBar from "../components/NavBar";
+import { FaAngleUp } from "react-icons/fa";
 
 export default function Home({ blogs, profile }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [showTopBtn, setShowTopBtn] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    });
+  }, []);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   //   Form validation state
   const [errors, setErrors] = useState({});
@@ -23,6 +42,14 @@ export default function Home({ blogs, profile }) {
   // Setting success or failure messages states
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
+
+  // Reset Inputs
+  const handleSend = (e) => {
+    e.preventDefault();
+    setName("");
+    setEmail("");
+    setMessage("");
+  };
 
   // Validation check method
   const handleValidation = () => {
@@ -282,7 +309,7 @@ export default function Home({ blogs, profile }) {
                       </a> */}
                     </div>
                   </div>
-                  <a href={"/blogs"}>
+                  <a className="ablogs" href={"/blogs"}>
                     <div className="buttons text-center md:text-left">
                       <button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white border-2 px-4 py-1 my-4 rounded-lg">
                         All Blogs
@@ -306,13 +333,24 @@ export default function Home({ blogs, profile }) {
                   Hey, I'm Arbab Tahir. Experienced engineer with 3 years in IT.
                   I'm a Front-end web developer who loves writing code, building
                   things, and solving problems. I build software and write code.
-                  I write bugs and call them features. I know multiple
-                  programming languages like Html, CSS, and Javascript
-                  (React.Js, Next.Js, Vue.js), and I use Frameworks for the
-                  front end like (Bootstrap, React Bootstrap) and some others.
-                  Javascript is my primary programming language. I work with
-                  different technologies every day. I like learning new things.
-                  I read books, and poetry, and play games in my free time.
+                  I write bugs and call them features. I work with different
+                  technologies like... (Html, CSS, Javascript, React.Js,
+                  Next.Js, Vue.Js) {/* <ul className="descList"> */}
+                  {/* <span className="block font-body font-bold text-grey-40"> */}
+                  {/* <li>Html</li>
+                  <li>CSS</li>
+                  <li>Javascript</li>
+                  <li>React.Js</li>
+                  <li>Next.Js</li>
+                  <li>Vue.js</li> */}
+                  {/* </span> */}
+                  {/* </ul> */}
+                  and I use Frameworks for the front end and for develop the
+                  creative designs (Bootstrap, React Bootstrap, Flexbox,
+                  Tailwind Css) and some others. Javascript is my primary
+                  programming language. I work with different technologies every
+                  day. I like learning new things. I read books, and poetry, and
+                  play games in my free time.
                 </p>
                 <div className="flex flex-col justify-center pt-6 sm:flex-row lg:justify-start">
                   <div className="flex items-center justify-center sm:justify-start">
@@ -903,7 +941,7 @@ export default function Home({ blogs, profile }) {
           <div className="bg-grey-50" id="blog">
             <div className="container py-16 md:py-20">
               <h2 className="text-center whoami font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-                I also like href write
+                I like to write
               </h2>
               <h4 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
                 Check out my latest posts!
@@ -927,7 +965,7 @@ export default function Home({ blogs, profile }) {
                           className="group relative h-72 bg-cover bg-center bg-no-repeat sm:h-84 lg:h-64 xl:h-72"
                         >
                           <span className="absolute inset-0 block bg-gradient-href-b from-blog-gradient-from href-blog-gradient-href bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"></span>
-                          <span className="absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-purple-500 px-6 py-2 text-center font-body text-sm font-bold uppercase text-white md:text-base cursor-pointer">
+                          <span className="absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 bg-gradient-to-r from-purple-500 to-blue-500 border-white px-6 py-2 text-center font-body text-sm font-bold uppercase text-white md:text-base cursor-pointer ">
                             Read More
                           </span>
                         </div>
@@ -1095,6 +1133,16 @@ export default function Home({ blogs, profile }) {
               </form>
             </div>
           </div> */}
+
+          <div className="top-to-btm">
+            {" "}
+            {showTopBtn && (
+              <FaAngleUp
+                className="icon-position icon-style"
+                onClick={goToTop}
+              />
+            )}{" "}
+          </div>
         </div>
         <div className="bg-gradient-to-r from-purple-500 to-blue-500">
           <div className="container flex flex-col justify-between py-6 sm:flex-row">
@@ -1102,15 +1150,18 @@ export default function Home({ blogs, profile }) {
               © Copyright 2023. Made with 💖, by Arbab Tahir.
             </p>
             <div className="flex items-center justify-center pt-5 sm:justify-start sm:pt-0">
-              <a href="/" className="pl-4">
+              <a href="https://twitter.com/marbabtahir" className="pl-4">
                 <i className="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
               </a>
 
-              <a href="/" className="pl-4">
+              <a
+                href="https://www.linkedin.com/in/marbabtahir/"
+                className="pl-4"
+              >
                 <i className="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
               </a>
 
-              <a href="/" className="pl-4">
+              <a href="https://github.com/arbab-tahir" className="pl-4">
                 <i className="bx bxl-github text-2xl text-white hover:text-yellow"></i>
               </a>
             </div>
